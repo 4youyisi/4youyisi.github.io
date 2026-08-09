@@ -53,8 +53,8 @@
     box-shadow:var(--shadow);text-align:center;
   }
   .brand h1{font-size:22px;font-weight:800;letter-spacing:2px;}
-  .brand h1 .by{font-size:10px;font-weight:600;color:var(--sub);letter-spacing:0;margin-left:8px;vertical-align:super;opacity:.75;}
-  .brand p{font-size:12px;color:var(--sub);margin-top:2px;letter-spacing:.5px;}
+  .brand p{font-size:12px;color:var(--sub);margin-top:2px;letter-spacing:.5px;display:flex;align-items:center;gap:6px;}
+  .brand p .by{font-size:12px;font-weight:700;color:var(--sub);letter-spacing:0;margin-left:auto;opacity:.75;}
   /* ── 主区域 ── */
   main{max-width:520px;margin:0 auto;padding:4px 16px calc(var(--nav-h) + 24px + env(safe-area-inset-bottom));}
   /* ── 随机卡 ── */
@@ -236,8 +236,8 @@
 <header class="brand" id="brandBar">
   <div class="logo">吃喝<br>大事</div>
   <div>
-    <h1>吃喝大事<span class="by">by XinSEC</span></h1>
-    <p>纠结星人救星 · 今天吃啥不用愁</p>
+    <h1>吃喝大事</h1>
+    <p>纠结星人救星 · 今天吃啥不用愁<span class="by">by XinSEC</span></p>
   </div>
 </header>
 

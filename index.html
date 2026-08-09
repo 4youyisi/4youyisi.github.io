@@ -53,6 +53,7 @@
     box-shadow:var(--shadow);text-align:center;
   }
   .brand h1{font-size:22px;font-weight:800;letter-spacing:2px;}
+  .brand h1 .by{font-size:10px;font-weight:600;color:var(--sub);letter-spacing:0;margin-left:8px;vertical-align:super;opacity:.75;}
   .brand p{font-size:12px;color:var(--sub);margin-top:2px;letter-spacing:.5px;}
   /* ── 主区域 ── */
   main{max-width:520px;margin:0 auto;padding:4px 16px calc(var(--nav-h) + 24px + env(safe-area-inset-bottom));}
@@ -112,6 +113,15 @@
   }
   .tab.on{background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;box-shadow:0 6px 14px rgba(255,126,79,.35);}
   .tab.coffee.on{background:linear-gradient(135deg,var(--coffee),var(--coffee2));box-shadow:0 6px 14px rgba(107,74,47,.3);}
+  .rollbtn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    width:100%;margin-bottom:14px;padding:12px;border:none;border-radius:var(--r-sm);
+    background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;
+    font-size:15px;font-weight:800;letter-spacing:2px;cursor:pointer;
+    box-shadow:0 6px 16px rgba(255,126,79,.3);transition:transform .15s;
+  }
+  .rollbtn:active{transform:scale(.97);}
+  .rollbtn.drink{background:linear-gradient(135deg,var(--milk),var(--milk2));box-shadow:0 6px 16px rgba(123,79,166,.3);}
   /* ── 网格 ── */
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding-bottom:10px;}
   .card{border-radius:var(--r-sm);background:var(--card);box-shadow:var(--shadow2);overflow:hidden;cursor:pointer;transition:transform .15s;position:relative;}
@@ -226,7 +236,7 @@
 <header class="brand" id="brandBar">
   <div class="logo">吃喝<br>大事</div>
   <div>
-    <h1>吃喝大事</h1>
+    <h1>吃喝大事<span class="by">by XinSEC</span></h1>
     <p>纠结星人救星 · 今天吃啥不用愁</p>
   </div>
 </header>
@@ -274,6 +284,7 @@
       <div class="back" data-goto="home">‹</div>
       <h2>🍜 吃什么</h2>
     </div>
+    <button class="rollbtn" id="rollEatPage">🎲 随机抽一个吃的</button>
     <div class="tabs" id="eatTabs"></div>
     <div class="grid" id="eatGrid"></div>
   </section>
@@ -284,6 +295,7 @@
       <div class="back" data-goto="home">‹</div>
       <h2>🥤 喝什么</h2>
     </div>
+    <button class="rollbtn drink" id="rollDrinkPage">🎲 随机抽一个喝的</button>
     <div class="tabs" id="drinkTabs"></div>
     <div id="drinkList"></div>
   </section>
@@ -828,6 +840,8 @@ function runThree(){
 $("#rollEat").addEventListener("click",()=>runRoll("eat"));
 $("#rollDrink").addEventListener("click",()=>runRoll("drink"));
 $("#rollThree").addEventListener("click",runThree);
+$("#rollEatPage").addEventListener("click",()=>runRoll("eat"));
+$("#rollDrinkPage").addEventListener("click",()=>runRoll("drink"));
 
 /* ═══════════ 初始化 ═══════════ */
 renderEatTabs();renderEatGrid();

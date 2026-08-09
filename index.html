@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>吃喝大事</title>
+<title>别纠结啦！</title>
 <meta name="description" content="纠结星人救星 · 今天吃啥喝啥不用愁,点开即用">
 <!-- 微信/QQ 分享卡片 -->
-<meta property="og:title" content="吃喝大事 · 点餐神器">
+<meta property="og:title" content="别纠结啦！ · 点餐神器">
 <meta property="og:description" content="纠结星人救星 · 今天吃啥喝啥不用愁">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://4youyisi.github.io/吃喝大事/share.jpg">
 <meta property="og:image:width" content="300">
 <meta property="og:image:height" content="300">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="吃喝大事 · 点餐神器">
+<meta name="twitter:title" content="别纠结啦！ · 点餐神器">
 <meta name="twitter:description" content="纠结星人救星 · 今天吃啥喝啥不用愁">
 <meta name="twitter:image" content="https://4youyisi.github.io/吃喝大事/share.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23FF7E4F'/%3E%3Cpath d='M14 30h36l-3 16a5 5 0 0 1-5 4H22a5 5 0 0 1-5-4l-3-16z' fill='%23FFF'/%3E%3Ccircle cx='24' cy='42' r='3.4' fill='%23FF7E4F'/%3E%3Ccircle cx='32' cy='44' r='3' fill='%23FF7E4F'/%3E%3Ccircle cx='39' cy='42' r='3.4' fill='%23FF7E4F'/%3E%3Ccircle cx='46' cy='26' r='3.4' fill='%23FFC9A3'/%3E%3Cpath d='M49 8l1.4 3 3 1.4-3 1.4L49 17l-1.4-3-3-1.4 3-1.4L49 8z' fill='%23FFC9A3'/%3E%3C/svg%3E">
@@ -198,13 +198,22 @@
   .modal .close{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;border:none;background:#F3E6D8;color:#A98B78;font-size:14px;cursor:pointer;}
   /* ── 三选一 ── */
   .three .cards{display:flex;flex-direction:column;gap:12px;margin-top:6px;}
-  .three .tc{display:flex;align-items:center;gap:14px;background:#fff;border-radius:18px;padding:14px;box-shadow:var(--shadow2);cursor:pointer;transition:transform .15s;text-align:left;}
+  .three .tc{display:flex;align-items:center;gap:14px;background:#fff;border-radius:18px;padding:14px;box-shadow:var(--shadow2);cursor:pointer;transition:transform .15s;text-align:left;position:relative;overflow:hidden;}
   .three .tc:active{transform:scale(.97);}
   .three .tc .e{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex:0 0 auto;}
   .three .tc .ti{flex:1;}
   .three .tc .ti b{font-size:16px;}
   .three .tc .ti small{display:block;font-size:11px;color:var(--sub);margin-top:3px;}
   .three .hint{font-size:12px;color:var(--sub);margin:16px 0 8px;line-height:1.6;}
+  /* 盲选卡片:背面(问号) */
+  .three .tc{position:relative;}
+  .three .tc .back{
+    position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;gap:6px;
+    background:linear-gradient(135deg,#FFB27A,#FF8A5C);color:#fff;border-radius:18px;
+    font-size:16px;font-weight:800;letter-spacing:1px;cursor:pointer;transition:transform .15s;
+  }
+  .three .tc .back:active{transform:scale(.97);}
+  .three .tc.revealed .back{display:none;}
   /* ── 底部导航 ── */
   nav{
     position:fixed;left:0;right:0;bottom:0;z-index:30;
@@ -234,10 +243,10 @@
 <body>
 
 <header class="brand" id="brandBar">
-  <div class="logo">吃喝<br>大事</div>
+  <div class="logo">别纠结<br>啦！</div>
   <div>
-    <h1>吃喝大事</h1>
-    <p>纠结星人救星 · 今天吃啥不用愁<span class="by">by XinSEC</span></p>
+    <h1>别纠结啦！</h1>
+    <p>纠结星人救星 · 今天吃啥不用愁<span class="by">Built by Xin·Sec</span></p>
   </div>
 </header>
 
@@ -326,7 +335,7 @@
     <button class="close" data-close2>✕</button>
     <div class="kicker">⚡ 灵魂三选一</div>
     <h2 style="font-size:18px">闭眼,然后随便点一个</h2>
-    <div class="hint">从全部美食·饮品·水果酸奶里帮你随机抽出 3 个 —— 点哪个听天由命,拒绝纠结 😌</div>
+    <div class="hint">从全部美食·饮品·水果酸奶里随机抽出 3 张 <b>盲牌</b> —— 闭眼乱点一张,天注定 ✨</div>
     <div class="cards" id="threeCards"></div>
   </div>
 </div>
@@ -563,7 +572,7 @@ function toast(msg){
 }
 
 /* ═══════════ 导航 ═══════════ */
-const PAGE_TITLES={home:"🏠 吃喝大事",eat:"🍜 吃什么",drink:"🥤 喝什么",mine:"❤️ 我的"};
+const PAGE_TITLES={home:"🏠 别纠结啦！",eat:"🍜 吃什么",drink:"🥤 喝什么",mine:"❤️ 我的"};
 function goto(name){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("on"));
   $("#page-"+name).classList.add("on");
@@ -826,6 +835,7 @@ function runThree(){
   const bg=["#FFE4D6","#FFF0C8","#E3F0E3"];
   $("#threeCards").innerHTML=picks.map((w,i)=>
     `<div class="tc" data-i="${i}">
+      <div class="back">❓ 选我</div>
       <div class="e" style="background:${bg[i]}">${w.e}</div>
       <div class="ti"><b>${w.n}</b><small>${w.kicker}</small></div>
       <span style="color:var(--sub)">›</span>
@@ -833,8 +843,14 @@ function runThree(){
   $("#modalThree").classList.add("on");
   $("#threeCards").querySelectorAll(".tc").forEach(c=>c.addEventListener("click",()=>{
     const w=picks[+c.dataset.i];
+    c.classList.add("revealed");   // 揭晓这一张
+    // 其余卡片变暗,不可再选
+    $("#threeCards").querySelectorAll(".tc").forEach(o=>{
+      if(o!==c){o.classList.add("revealed");o.style.opacity=".35";o.style.pointerEvents="none";}
+    });
+    c.querySelector(".back").textContent = "就是这个!";
     addToday({n:w.n,e:w.e,c:w.c});
-    closeModals();toast("天意如此,就吃它了:"+w.n+" ✨");
+    toast("天意如此,就吃它了:"+w.n+" ✨");
   }));
 }
 $("#rollEat").addEventListener("click",()=>runRoll("eat"));
